@@ -2,8 +2,8 @@ import hashlib
 import sys
 import os.path
 
-basePath = "cells/"
-numCells = 3
+basePath = "/mnt/server/iot"
+numCells = 10
 
 # Part w/ big block of code to open the cell
 def OpenCell(cellNumStr):
