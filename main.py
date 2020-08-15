@@ -4,12 +4,17 @@ import hashlib
 def OpenCell():
     print("Open your cell!")
 
-checkStr = "827ccb0eea8a706c4c34a16891f84e7b"   # TODO: Move it in the file
-userStr = input("Enter your code:")
+def main():
 
-hashStrObj = hashlib.md5(userStr.encode())
+    userStr = input("Enter your code:")
 
-if hashStrObj.hexdigest() == checkStr:
-    OpenCell()
-else:
-    print("Code check error!")
+    checkStr = "827ccb0eea8a706c4c34a16891f84e7b"   # TODO: Move it in the file
+    hashStrObj = hashlib.md5(userStr.encode())
+
+    if hashStrObj.hexdigest() == checkStr:
+        OpenCell()
+    else:
+        print("Code check error!")
+
+if __name__ == "__main__":
+    main()
