@@ -1,6 +1,6 @@
 import os.path
 
-basePath = "/mnt/server/iot"
+basePath = "/mnt/server/iot/"
 numCells = 10
 
 def CheckCellFile(fileName):

@@ -2,7 +2,7 @@ import hashlib
 import sys
 import os.path
 
-basePath = "/mnt/server/iot"
+basePath = "/mnt/server/iot/"
 numCells = 10
 
 # Part w/ big block of code to open the cell
