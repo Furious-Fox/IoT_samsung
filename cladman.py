@@ -32,7 +32,7 @@ def main():
     if freeCellIndex == 0:
         print("No free cells left")
     else:
-        print("Put your order " + orderNum + " to cell number: " + freeCellIndex)
+        print("Put your order " + str(orderNum) + " to cell number: " + str(freeCellIndex))
 
 if __name__ == "__main__":
     main()
