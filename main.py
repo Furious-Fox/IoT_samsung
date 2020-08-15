@@ -1,11 +1,17 @@
 def OpenCell():
     print("Open your cell!")
 
-userStr = input("Enter your code:")
 
-checkStr = "12345"
+def main():
 
-if userStr == checkStr:
-    OpenCell()
-else:
-    print("Code check error!")
+    userStr = input("Enter your code:")
+
+    checkStr = "12345"
+
+    if userStr == checkStr:
+        OpenCell()
+    else:
+        print("Code check error!")
+
+if __name__ == "__main__":
+    main()
