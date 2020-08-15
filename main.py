@@ -2,12 +2,12 @@ import hashlib
 import sys
 import os.path
 
-basePath = "/home/vm/IoT_samsung/Cells/"
+basePath = "cells/"
 numCells = 3
 
 # Part w/ big block of code to open the cell
-def OpenCell():
-    print("Open your cell!")
+def OpenCell(cellNumStr):
+    print("Open your cell "+cellNumStr+"!")
 
 def WriteHashInFile(fileName ,hashStr):
     try:
@@ -54,14 +54,14 @@ def main():
     #    cellNumInt = int(cellNumStr[1])
     
     userStr = userStr[2:]
-
+    hashFileStr=None
     if(CheckCellFile(cellNumStr)):
         hashFileStr = GetHashFromFile(cellNumStr)
 
     userStr = hashlib.md5(userStr.encode())
 
     if userStr.hexdigest() == hashFileStr:
-        OpenCell()
+        OpenCell(cellNumStr)
     else:
         print("Code check error!")
 
