@@ -53,11 +53,6 @@ def GetHashFromFile(fileName):
 
 
 def main():
-    # Debug init
-    WriteHashInFile("01", "781e5e245d69b566979b86e28d23f2c7")
-    WriteHashInFile("02", "781e5e245d69b566979b86e28d23f2c7")
-    WriteHashInFile("03", "781e5e245d69b566979b86e28d23f2c7")
-    #
 
     userStr = input("Enter your code: ")
     cellNumStr = userStr[:2]
