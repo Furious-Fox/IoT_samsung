@@ -12,7 +12,6 @@ def OpenCell(cellNumStr):
 def DeleteHashFile(fileName):
     try:
         if os.path.exists(basePath + fileName):
-            print("Delete cell file")
             os.remove(basePath + fileName)
             #os.system("rm " + basePath + fileName)
         else:
