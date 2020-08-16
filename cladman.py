@@ -2,6 +2,7 @@ import os.path
 import sys
 import cladmanUI
 from PyQt5 import QtWidgets
+from PyQt5 import QtCore
 
 basePath = "/mnt/server/iot/"
 numCells = 10
@@ -11,14 +12,40 @@ class CladmanWindow(QtWidgets.QMainWindow, cladmanUI.Ui_MainWindow):
         super().__init__()
         self.setupUi(self) 
         self.pushButton.clicked.connect(self.action_done)
+        self.comboBox.addItem("451")
+        self.comboBox.addItem("061")
+        self.comboBox.addItem("039")
+        self.comboBox.addItem("444")
+        self.comboBox.addItem("777")
+        self.comboBox.addItem("666")
+
+    def PutOrderInCell(self, cellNum):
+        self.label_2.setText("Положите заказ №" + self.comboBox.currentText() + " в ячейку: " + str(cellNum))
+        self.comboBox.removeItem(self.comboBox.findText(self.comboBox.currentText()))
+        if (cellNum < 10):
+            self.WriteHashInFile("0" + str(cellNum), "781e5e245d69b566979b86e28d23f2c7")
+        else:
+            self.WriteHashInFile(str(cellNum), "781e5e245d69b566979b86e28d23f2c7")
+        
+        self.clear_text_3s_delay()
+
+
+    # Clear main text after 3s
+    def clear_text_3s_delay(self):
+        loop = QtCore.QEventLoop()
+        QtCore.QTimer.singleShot(3000, loop.quit)
+        loop.exec_()
+        self.label_2.setText("")
 
 
     def action_done(self):
         cellNum=self.FindFreeCell()
         if cellNum==0:
-            self.label_2.setText("No free cells left")
+            self.label_2.setText("Свободных ячеек не осталось")
+            self.clear_text_3s_delay()
         else:
-            self.label_2.setText("Put your order ***" + " to cell number: " + str(cellNum))
+            self.PutOrderInCell(cellNum)
+            
 
 
     def CheckCellFile(self, fileName):
@@ -55,20 +82,7 @@ def main():
     application = CladmanWindow()
     application.show()
     app.exec_()
-    
-    
-    freeCellNum = FindFreeCell()
-    if freeCellNum == 0:
-        pass
-        #print("No free cells left")
-    else:
-        pass
-        #print("Put your order " + str(orderNum) + " to cell number: " + str(freeCellNum))
-    
-        if (freeCellNum < 10):
-            WriteHashInFile("0" + str(freeCellNum), "781e5e245d69b566979b86e28d23f2c7")
-        else:
-            WriteHashInFile(str(freeCellNum), "781e5e245d69b566979b86e28d23f2c7")
+        
 
 if __name__ == "__main__":
     main()

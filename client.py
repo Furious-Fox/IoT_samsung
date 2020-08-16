@@ -129,10 +129,6 @@ class userInterface(QtWidgets.QMainWindow, clientUI.Ui_MainWindow):
         userStr = self.lineEdit.text()
         if not userStr: return
         cellNumStr = userStr[:2]
-
-        # Maybe we need it
-        #if cellNumStr[0] == '0':
-        #    cellNumInt = int(cellNumStr[1])
         
         userStr = userStr[2:]
         hashFileStr=None
@@ -157,46 +153,12 @@ class userInterface(QtWidgets.QMainWindow, clientUI.Ui_MainWindow):
 
 
 
-        
-
-
-
-
-
-
-
-
 def main():
     app = QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication
     window = userInterface()  # Создаём объект класса ExampleApp
     window.show()  # Показываем окно
     app.exec_()  # и запускаем приложение
 
-
-
-def main_old():
-
-    userStr = input("Enter your code: ")
-    cellNumStr = userStr[:2]
-
-    # Maybe we need it
-    #if cellNumStr[0] == '0':
-    #    cellNumInt = int(cellNumStr[1])
-    
-    userStr = userStr[2:]
-    hashFileStr=None
-    if(CheckCellFile(cellNumStr)):
-        hashFileStr = GetHashFromFile(cellNumStr)
-
-    userStr = hashlib.md5(userStr.encode())
-
-    if userStr.hexdigest() == hashFileStr:
-        OpenCell(cellNumStr)
-        DeleteHashFile(cellNumStr)
-    else:
-        print("Code check error!")
-
-    main()
 
 if __name__ == "__main__":
     main()
