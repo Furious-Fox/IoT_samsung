@@ -2,12 +2,24 @@ import hashlib
 import sys
 import os.path
 
-basePath = "cells/"
-numCells = 3
+basePath = "/mnt/server/iot/"
+numCells = 10
 
 # Part w/ big block of code to open the cell
 def OpenCell(cellNumStr):
     print("Open your cell "+cellNumStr+"!")
+
+def DeleteHashFile(fileName):
+    try:
+        if os.path.exists(basePath + fileName):
+            os.remove(basePath + fileName)
+            #os.system("rm " + basePath + fileName)
+        else:
+            print("File does not exist", file = sys.stderr)
+    except Exception as ex:
+        print("Cant remove file :" + fileName, file = sys.stderr)
+        print(ex, file = sys.stderr)
+        
 
 def WriteHashInFile(fileName ,hashStr):
     try:
@@ -18,7 +30,7 @@ def WriteHashInFile(fileName ,hashStr):
         print(ex, file = sys.stderr)
     finally:
         fileObj.close()
- 
+
 def CheckCellFile(fileName):
     filePath = basePath + fileName
     if os.path.exists(filePath):
@@ -40,13 +52,8 @@ def GetHashFromFile(fileName):
 
 
 def main():
-    # Debug init
-    WriteHashInFile("01", "781e5e245d69b566979b86e28d23f2c7")
-    WriteHashInFile("02", "781e5e245d69b566979b86e28d23f2c7")
-    WriteHashInFile("03", "781e5e245d69b566979b86e28d23f2c7")
-    #
 
-    userStr = input("Enter your code:")
+    userStr = input("Enter your code: ")
     cellNumStr = userStr[:2]
 
     # Maybe we need it
@@ -62,8 +69,11 @@ def main():
 
     if userStr.hexdigest() == hashFileStr:
         OpenCell(cellNumStr)
+        DeleteHashFile(cellNumStr)
     else:
         print("Code check error!")
+
+    main()
 
 if __name__ == "__main__":
     main()
