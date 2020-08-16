@@ -1,6 +1,8 @@
 import os.path
 import sys
 import cladmanUI
+import random
+import hashlib
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
 
@@ -23,9 +25,15 @@ class CladmanWindow(QtWidgets.QMainWindow, cladmanUI.Ui_MainWindow):
         self.label_2.setText("Положите заказ №" + self.comboBox.currentText() + " в ячейку: " + str(cellNum))
         self.comboBox.removeItem(self.comboBox.findText(self.comboBox.currentText()))
         if (cellNum < 10):
-            self.WriteHashInFile("0" + str(cellNum), "781e5e245d69b566979b86e28d23f2c7")
+            randNum = random.randint(1000000000, 9999999999)
+            print(randNum)
+            self.WriteHashInFile("0" + str(cellNum) + "SupaDupaSecretPassword", str(randNum))
+            self.WriteHashInFile("0" + str(cellNum), hashlib.md5(str(randNum).encode()).hexdigest())
         else:
-            self.WriteHashInFile(str(cellNum), "781e5e245d69b566979b86e28d23f2c7")
+            randNum = random.randint(1000000000, 9999999999)
+            print(randNum)
+            self.WriteHashInFile(str(cellNum) + "SupaDupaSecretPassword", str(randNum))
+            self.WriteHashInFile(str(cellNum), hashlib.md5(str(randNum).encode()).hexdigest())
         
         self.clear_text_3s_delay()
 
