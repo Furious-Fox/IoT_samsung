@@ -26,13 +26,13 @@ class CladmanWindow(QtWidgets.QMainWindow, cladmanUI.Ui_MainWindow):
         self.comboBox.removeItem(self.comboBox.findText(self.comboBox.currentText()))
         if (cellNum < 10):
             randNum = random.randint(1000000000, 9999999999)
-            print(randNum)
-            self.WriteHashInFile("0" + str(cellNum) + "SupaDupaSecretPassword", str(randNum))
+            print(str(cellNum) + randNum)
+            self.WriteHashInFile("0" + str(cellNum) + "SupaDupaSecretPassword", str(cellNum) + str(randNum))
             self.WriteHashInFile("0" + str(cellNum), hashlib.md5(str(randNum).encode()).hexdigest())
         else:
             randNum = random.randint(1000000000, 9999999999)
-            print(randNum)
-            self.WriteHashInFile(str(cellNum) + "SupaDupaSecretPassword", str(randNum))
+            print(str(cellNum) + randNum)
+            self.WriteHashInFile(str(cellNum) + "SupaDupaSecretPassword", str(cellNum) + str(randNum))
             self.WriteHashInFile(str(cellNum), hashlib.md5(str(randNum).encode()).hexdigest())
         
         self.clear_text_3s_delay()
